@@ -8,7 +8,19 @@
  *  var api = $('.sigPad').signaturePad({displayOnly:true})
  *  api.regenerate(sig)
  */
-(function ($) {
+(function (factory) {
+
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    }
+    else {
+        if (typeof window.jQuery === 'undefined') {
+            throw new ReferenceError('Cannot find jQuery; signature-pad requires jQuery.');
+        }
+        factory(window.jQuery);
+    }
+
+})(function ($) {
 
 function SignaturePad (selector, options) {
   /**
@@ -888,4 +900,4 @@ $.fn.signaturePad.defaults = {
   , onDrawEnd : null // Pass a callback to be exectued after the drawing process
 }
 
-}(jQuery))
+});
